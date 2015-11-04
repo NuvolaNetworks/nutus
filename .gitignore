@@ -11,4 +11,4 @@ test/dummy/.sass-cache
 .idea/
 Gemfile.lock
 *.iml
-
+*.sqlite3

@@ -14,10 +14,18 @@ Gem::Specification.new do |s|
   s.description = "TODO: Description of Nutus."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "Rakefile"]
   s.test_files = Dir["test/**/*"]
 
+  s.required_ruby_version = '~> 2.1.7'
+  
   s.add_dependency "rails", "~> 4.2.4"
 
-  s.add_development_dependency "sqlite3"
+  [['pry'],
+   ['pry-rails'],
+   ['spring'],
+   ['sqlite3']
+  ].each do |d|
+    s.add_development_dependency d.first
+  end
 end
