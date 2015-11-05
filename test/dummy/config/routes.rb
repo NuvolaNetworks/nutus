@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
 
-  mount Nutus::Engine => "/nutus"
+  get '/',
+      to: 'demo#index'
+
+  mount Nutus::Engine => '/uploads'
 end

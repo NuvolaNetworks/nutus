@@ -12,3 +12,5 @@ test/dummy/.sass-cache
 Gemfile.lock
 *.iml
 *.sqlite3
+
+.DS_Store

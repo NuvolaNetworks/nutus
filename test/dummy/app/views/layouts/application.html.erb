@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dummy</title>
+  <title>Nutus</title>
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-2.1.4.min.js' %>
+  <%= javascript_include_tag 'tus.js' %>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,3 +16,4 @@
 
 </body>
 </html>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
