@@ -1,4 +1,3 @@
-<link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet" />
 <div class="container">
   <h1>tus-js-client demo</h1>
 
@@ -38,9 +37,7 @@
     <tr>
       <td>
         <label for="resume">
-          Perform full upload:
-          <br />
-          <small>(even if we could resume)</small>
+          Resume Off
         </label>
       </td>
       <td>
@@ -49,28 +46,23 @@
     </tr>
   </table>
 
-  <br />
-
-  <input type="file">
-
-  <br />
-  <br />
-
-  <div class="row">
-    <div class="span8">
-      <div class="progress progress-striped progress-success">
-        <div class="bar" style="width: 0%;"></div>
+  <script id="upload-template" type="text/x-handlebars-template">
+    <hr/>
+    <div class="row">
+      <div class="span4">
+        <input type="file">
+      </div>
+      <div class="span4" style="display: none;">
+        <div class="progress progress-striped progress-info">
+          <div class="bar" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="span4" style="display: none;">
+        <button class="btn btn-danger">
+          Pause
+        </button>
       </div>
     </div>
-    <div class="span4">
-      <button class="btn btn-danger stop disabled" id="stop-btn"><i class="icon-white icon-stop"></i> abort upload</button>
-    </div>
-  </div>
-
-  <hr />
-  <h3>Uploads</h3>
-  <p>
-    Successful uploads will be listed here.
-  </p>
+  </script>
 
 </div>
