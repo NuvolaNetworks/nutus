@@ -7,11 +7,11 @@ require "nutus/version"
 Gem::Specification.new do |s|
   s.name        = "nutus"
   s.version     = Nutus::VERSION
-  s.authors     = ["Matt Schlobohm"]
+  s.authors     = ["Nuvola Networks"]
   s.email       = ["mattschlobohm@users.noreply.github.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Nutus."
-  s.description = "TODO: Description of Nutus."
+  s.homepage    = ""
+  s.summary     = ""
+  s.description = ""
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "Rakefile"]
