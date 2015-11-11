@@ -1,12 +1,11 @@
 Nutus::Engine.routes.draw do
-  post '/',
-       to: 'uploads#create_upload'
+  post '/uploads', to: 'uploads#create_upload'
 
-  get '/:id',
+  get '/uploads/:id',
       to: 'uploads#head_upload',
-      constraints: lambda {|r| r.head?},
+      constraints: lambda { |r| r.head? },
       as: 'head_upload'
 
-  patch '/:id',
+  patch '/uploads/:id',
         to: 'uploads#patch_upload'
 end
