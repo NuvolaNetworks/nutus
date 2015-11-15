@@ -1,5 +1,7 @@
 Nutus::Engine.routes.draw do
-  post '/uploads', to: 'uploads#create_upload'
+  post '/uploads',
+       to: 'uploads#create_upload',
+       as: 'create_upload'
 
   get '/uploads/:id',
       to: 'uploads#head_upload',
@@ -7,5 +9,6 @@ Nutus::Engine.routes.draw do
       as: 'head_upload'
 
   patch '/uploads/:id',
-        to: 'uploads#patch_upload'
+        to: 'uploads#patch_upload',
+        as: 'patch_upload'
 end

@@ -1,14 +1,21 @@
 require_dependency "nutus/application_controller"
 
 module Nutus
-  class UploadsController < ActionController::Base
+  class UploadsController < ApplicationController
 
     before_action only: [:head_upload, :patch_upload] do |controller|
       @upload = Upload.find params[:id]
       file_name = @upload.id.to_s
       @offset = File.exist?(file_name) ? File.stat(file_name).size : 0
     end
-    
+
+    before_action do |controller|
+      @user = self.send Nutus.user_reader_name
+      if !Nutus.owner_class.allow? params: params, user: @user, upload: @upload
+        head :forbidden
+      end
+    end
+
     after_action do |controller|
       response.headers['Tus-Resumable'] = '1.0.0'
     end
@@ -16,10 +23,10 @@ module Nutus
     def create_upload
       upload_length = request.headers['Upload-Length']
 
-      upload = Upload.create_upload size: upload_length
+      @upload = Upload.create size: upload_length
 
       head :created,
-           location: (url_for head_upload_path(id: upload.id))
+           location: (url_for head_upload_path(id: @upload.id))
     end
 
     def head_upload
@@ -57,6 +64,5 @@ module Nutus
       head :no_content,
            'Upload-Offset' => @offset
     end
-
   end
 end

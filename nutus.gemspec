@@ -21,7 +21,8 @@ Gem::Specification.new do |s|
   
   s.add_dependency "rails", "~> 4.2.4"
 
-  [['pry'],
+  [['devise'],
+   ['pry'],
    ['pry-rails'],
    ['spring'],
    ['sqlite3']

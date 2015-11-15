@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/',
-      to: 'demo#index'
+  devise_for :users
 
-  mount Nutus::Engine => '/pf/nutus'
+  root to: 'demo#index'
+
+  mount Nutus::Engine => '/nutus'
 end
