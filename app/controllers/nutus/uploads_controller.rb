@@ -5,7 +5,7 @@ module Nutus
 
     before_action only: [:head_upload, :patch_upload] do |controller|
       @upload = Upload.find params[:id]
-      file_name = @upload.id.to_s
+      file_name = File.join Nutus.store_path, @upload.id.to_s
       @offset = File.exist?(file_name) ? File.stat(file_name).size : 0
     end
 
@@ -45,7 +45,7 @@ module Nutus
         head :conflict and return
       end
 
-      file_out = File.open params[:id], 'ab'
+      file_out = File.open File.join(Nutus.store_path, params[:id]), 'ab'
 
       bytes_in = ''
       while !bytes_in.nil? && @offset < @upload.size do
