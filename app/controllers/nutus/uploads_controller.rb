@@ -23,7 +23,7 @@ module Nutus
     def create_upload
       upload_length = request.headers['Upload-Length']
 
-      @upload = Upload.create size: upload_length
+      @upload = Upload.create size: upload_length, owner: @user
 
       head :created,
            location: (url_for head_upload_path(id: @upload.id))
