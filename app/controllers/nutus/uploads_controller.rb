@@ -1,4 +1,5 @@
 require_dependency "nutus/application_controller"
+require 'fileutils'
 
 module Nutus
   class UploadsController < ApplicationController
@@ -22,9 +23,8 @@ module Nutus
     
     def create_upload
       upload_length = request.headers['Upload-Length']
-
       @upload = Upload.create size: upload_length, owner: @user
-
+      FileUtils.touch File.join(Nutus.store_path, @upload.id.to_s)
       head :created,
            location: (url_for head_upload_path(id: @upload.id))
     end
