@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
     begin
       sign_in :user, User.find(params[:user_id])
     rescue
-      # logging.........need it better here...
-      puts "could not sign in #{params[:user_id]}"
+      logger.debug {"could not sign in #{params[:user_id]}"}
     end
   }
 end
