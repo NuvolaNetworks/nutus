@@ -23,8 +23,9 @@ module Nutus
     
     def create_upload
       upload_length = request.headers['Upload-Length']
-      @upload = Upload.create size: upload_length, owner: @user
-      FileUtils.touch File.join(Nutus.store_path, @upload.id.to_s)
+      filename = request.headers['Upload-Metadata'].split.last
+      @upload = Upload.create size: upload_length, owner: @user, filename: filename
+      FileUtils.touch File.join(Nutus.store_path, @upload.filename)
       head :created,
            location: (url_for head_upload_path(id: @upload.id))
     end

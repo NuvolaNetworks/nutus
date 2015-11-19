@@ -17,3 +17,5 @@ Gemfile.lock
 
 .generators
 .rakeTasks
+
+schema.rb
