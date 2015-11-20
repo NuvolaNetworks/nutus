@@ -6,7 +6,7 @@ module Nutus
 
     before_action only: [:head_upload, :patch_upload] do |controller|
       @upload = Upload.find params[:id]
-      file_name = File.join Nutus.store_path, @upload.id.to_s
+      file_name = File.join Nutus.store_path, @upload.filename
       @offset = File.exist?(file_name) ? File.stat(file_name).size : 0
     end
 
