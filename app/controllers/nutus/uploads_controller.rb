@@ -23,7 +23,8 @@ module Nutus
     
     def create_upload
       upload_length = request.headers['Upload-Length']
-      filename = request.headers['Upload-Metadata'].split.last
+      # TODO process multiple metadatas in header and generically according to protocol
+      filename = Base64.decode64(request.headers['Upload-Metadata'].split.last)
       @upload = Upload.create size: upload_length, owner: @user, filename: filename
       FileUtils.touch File.join(Nutus.store_path, @upload.filename)
       head :created,
