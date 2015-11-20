@@ -47,7 +47,7 @@ module Nutus
         head :conflict and return
       end
 
-      file_out = File.open File.join(Nutus.store_path, params[:id]), 'ab'
+      file_out = File.open File.join(Nutus.store_path, @upload.filename), 'ab'
 
       bytes_in = ''
       while !bytes_in.nil? && @offset < @upload.size do
