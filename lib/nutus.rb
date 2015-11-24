@@ -8,7 +8,7 @@ module Nutus
 
   @@owner_class = 'User'
   @@user_reader_name = 'current_user'
-  @@store_path = ENV['NUTUS_STORE_PATH'] || '/tmp'
+  @@store_path = ENV['NUTUS_STORE_PATH'] || ENV['TMPDIR'] || Dir.tmpdir
 
   FileUtils.mkdir_p @@store_path unless File.exists? @@store_path
   
