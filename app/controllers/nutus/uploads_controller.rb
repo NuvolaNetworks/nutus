@@ -6,8 +6,7 @@ module Nutus
 
     before_action only: [:head_upload, :patch_upload] do |controller|
       @upload = Upload.find params[:id]
-      file_name = File.join Nutus.store_path, @upload.id
-      @offset = File.exist?(file_name) ? File.stat(file_name).size : 0
+      @offset = File.exist?(@upload.store_path) ? File.stat(@upload.store_path).size : 0
     end
 
     before_action do |controller|
@@ -26,7 +25,6 @@ module Nutus
       # TODO process multiple metadatas in header and generically according to protocol
       filename = Base64.decode64(request.headers['Upload-Metadata'].split.last)
       @upload = Upload.create size: upload_length, owner: @user, filename: filename
-      FileUtils.touch File.join(Nutus.store_path, @upload.id)
       head :created,
            location: (url_for head_upload_path(id: @upload.id))
     end
@@ -47,7 +45,7 @@ module Nutus
         head :conflict and return
       end
 
-      file_out = File.open File.join(Nutus.store_path, @upload.id), 'ab'
+      file_out = File.open @upload.store_path, 'ab'
 
       bytes_in = ''
       while !bytes_in.nil? && @offset < @upload.size do
