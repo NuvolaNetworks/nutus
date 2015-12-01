@@ -1,4 +1,4 @@
-var demo = (function () {
+var demo = function () {
     var $uploadTemplate = $('#upload-template');
     var uploadTemplate = Handlebars.compile($uploadTemplate.html());
     var resumeCheckbox = document.querySelector("#resume");
@@ -6,8 +6,7 @@ var demo = (function () {
     var chunkInput = document.querySelector("#chunksize");
     var endpointInput = document.querySelector("#endpoint");
 
-    var DEFAULT_CHUNK_SIZE = Math.pow(2,20);
-    chunkInput.value = DEFAULT_CHUNK_SIZE;
+    chunkInput.value = Math.pow(2,20);
 
     if (!tus.isSupported) {
         alertBox.className = alertBox.className.replace("hidden", "");
@@ -20,7 +19,7 @@ var demo = (function () {
 
         var fileInput = $('input[type=file]:enabled');
 
-        fileInput.on("change", function (e) {
+        fileInput.on('change', function (e) {
             startNewUpload(e.target);
         });
     }
@@ -35,7 +34,6 @@ var demo = (function () {
             .siblings()
             .show();
 
-        var file = fileInput.files[0];
         addNewUploader();
 
         var endpoint = endpointInput.value;
@@ -46,43 +44,35 @@ var demo = (function () {
 
         var options = {
             endpoint: endpoint,
+            headers: {userid: 1},
             resume: !resumeCheckbox.checked,
-            chunkSize: chunkSize,
-            metadata: {
-                filename: file.name
-            },
-            onError: function (error) {
-                $uploadContainer.find('.progress').removeClass("active");
-                alert("Failed because: " + error)
-            },
-            onProgress: function (bytesUploaded, bytesTotal) {
-                if (shouldUpdateProgress) {
-                    var percentage = (bytesUploaded / bytesTotal * 100).toFixed(2);
-                    $uploadContainer.find('.bar').css('width', percentage + '%');
-                    shouldUpdateProgress = false;
-                }
-            },
-            onSuccess: function () {
+            chunkSize: chunkSize
+        };
+
+
+        $(fileInput)
+            .on('nutus.onError', function () {
+                $uploadContainer.find('.progress').removeClass('active');
+                alert('problem!');
+            })
+            .on('nutus.onProgress', function (e, bytesSent, bytesTotal) {
+                var percentage = (bytesSent / bytesTotal * 100).toFixed(2);
+                console.log(percentage);
+                $uploadContainer.find('.bar').css('width', percentage + '%');
+            })
+            .on('nutus.onSuccess', function () {
                 $uploadContainer.find('.progress')
                     .removeClass('active');
                 $uploadContainer.find('.btn')
                     .remove();
                 isUploading = false;
                 $uploadContainer.find('.bar').css('width', '100%');
-            },
-            onChunkComplete: function() {
-            }
-        };
+            });
 
-        upload = new tus.Upload(file, options);
-        upload.start();
+        $(fileInput).nutusUploader(options);
+
         var isUploading = true;
-        var shouldUpdateProgress = false;
-        var uploadInterval = window.setInterval(function() {
-            if (isUploading) {
-                shouldUpdateProgress = true;
-            }
-        }, 500);
+
         $uploadContainer.find('.btn').on("click", function (e) {
             e.preventDefault();
             $(e.target)
@@ -98,7 +88,7 @@ var demo = (function () {
             }
         });
     }
-});
+};
 
 $(function() {
     demo = demo();

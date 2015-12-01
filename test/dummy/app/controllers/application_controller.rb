@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   before_action lambda { |controller|
     sign_out current_user
     begin
-      sign_in :user, User.find(params[:user_id])
+      sign_in :user, User.find(request.headers[:userid])
     rescue
-      logger.debug {"could not sign in #{params[:user_id]}"}
+      logger.debug {"could not sign in #{params[:userid]}"}
     end
   }
 end
