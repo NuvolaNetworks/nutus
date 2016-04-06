@@ -1,6 +1,6 @@
 ### Nutus - The Nuvola tus.io Resumable File Uploader
 
-Here be a Rails engine that is a minimal implementation of the [tus.io Open Protocol for Resumable Uploads](http://tus.io).
+Here be a Rails Engine that is a minimal implementation of the [tus.io Open Protocol for Resumable Uploads](http://tus.io).
 
 We're still not exactly sure what words are behind the TUS acronym, but we DO know that the protocol works.
 
