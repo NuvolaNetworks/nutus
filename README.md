@@ -11,4 +11,4 @@ This implementation is brought to you by the good folks at [Nuvola Networks](htt
 - Documentation!
 - Open source license!
 - Publish to rubygems.org!
-- Fame! Fortune! Or at least a "Kudos guys, that thing you did was alright." :)
+- Fame! Fortune! (Or maybe at least a "Kudos guys, that thing you did was alright." :))
