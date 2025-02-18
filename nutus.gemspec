@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "Rakefile"]
   s.test_files = Dir["test/**/*"]
 
-  s.required_ruby_version = '~> 2'
+ s.required_ruby_version = '>= 2.0.0'
   
 
   [['devise'],
